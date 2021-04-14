@@ -32,7 +32,7 @@ export default {
       auth
         .signOut()
         .then(() => {
-          // Sign-out successful.
+          this.$router.push("/");
         })
         .catch(error => {
           this.errorCode = error.code;
