@@ -42,7 +42,7 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
-``k,8i`
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
