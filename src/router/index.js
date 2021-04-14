@@ -7,8 +7,19 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    component: () => import(/* webpackChunkName: "home" */ "../views/Login.vue")
+  },
+  {
+    path: "/register",
+    name: "Register",
     component: () =>
-      import(/* webpackChunkName: "home" */ "../views/Home.vue")
+      import(/* webpackChunkName: "register" */ "../views/Register.vue")
+  },
+  {
+    path: "/secure-area",
+    name: "SecureArea",
+    component: () =>
+      import(/* webpackChunkName: "secure-area" */ "../views/SecureArea.vue")
   }
 ];
 
