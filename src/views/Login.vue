@@ -5,7 +5,7 @@
         <h1 class="title is-1">Login</h1>
 
         <b-field label="Name">
-          <b-input v-model="name"></b-input>
+          <b-input v-model="email"></b-input>
         </b-field>
 
         <b-field label="Password">
@@ -14,7 +14,7 @@
         </b-field>
 
         <div class="buttons">
-          <b-button type="is-primary">Login</b-button>
+          <b-button type="is-primary" @click="submitLogin">Login</b-button>
         </div>
         <router-link to="/register">No account yet? Register here</router-link>
       </div>
@@ -23,13 +23,44 @@
 </template>
 
 <script>
+import { auth } from "@/firebase";
+
 export default {
   name: "Login",
   data() {
     return {
       email: null,
-      password: null
+      password: null,
+      errorCode: null,
+      errorMessage: null
     };
+  },
+  computed: {
+    err() {
+      return `${this.errorCode}: ${this.errorMessage}`;
+    }
+  },
+  methods: {
+    submitLogin() {
+      if (!this.email || !this.password) return;
+
+      auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push("secure-area");
+        })
+        .catch(error => {
+          this.errorCode = error.code;
+          this.errorMessage = error.message;
+
+          this.$buefy.toast.open({
+            duration: 5000,
+            message: this.err,
+            position: "is-bottom-right",
+            type: "is-danger"
+          });
+        });
+    }
   }
 };
 </script>
