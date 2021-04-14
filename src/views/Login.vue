@@ -27,7 +27,8 @@ export default {
   name: "Login",
   data() {
     return {
-      name: null
+      email: null,
+      password: null
     };
   }
 };
